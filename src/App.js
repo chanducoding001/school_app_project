@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React from 'react'
+import Sidebar from './layouts/Sidebar';
+import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import Home from './components/Home';
+import Register from './authorization/Register';
+import Login from './authorization/Login';
+import Employee from './components/Employee';
+import Parent from './components/Parent';
+import Principal from './components/Principal';
+import './layouts/root.css'
+import Protected from './protectedRoutes/Protected';
+import Authenticate from './protectedRoutes/Authenticate';
+import AddEmployee from './principalPages/AddEmployee';
+import ViewEmployees from './principalPages/ViewEmployees';
+import EditEmployee from './principalPages/EditEmployee';
+const App = () => {
+  // const schoolData = JSON.parse(sessionStorage.getItem('schoolData'));
+  // const role = schoolData?.role;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <BrowserRouter>
+    <Routes>
+      <Route element={<Authenticate/>}>
+      <Route path='/' element={<Sidebar/>}>
+        <Route index element={<Home/>}/>
+        <Route element={<Protected role='1'/>} >
+        <Route path='/principal' element={<Principal/>}/>
+        <Route path='/addEmployee' element={<AddEmployee/>}/>
+        <Route path='/viewEmployees' element={<ViewEmployees/>}/>
+        <Route path='/editEmployee/:id' element={<EditEmployee/>}/>
+        </Route>
+        <Route element={<Protected role='2'/>}>
+        <Route path='/employee' element={<Employee/>}/>
+        
+        </Route>
+        <Route element={<Protected role='3'/>}>
+        <Route path='/parent' element={<Parent/>}/>
+        </Route>
+      </Route>
+      </Route>
+      <Route path='/register' element={<Register/>}/>
+      <Route path='/login' element={<Login/>}/>
+    </Routes>
+    </BrowserRouter>
+    </>
+  )
 }
 
 export default App;

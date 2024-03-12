@@ -1,0 +1,83 @@
+*{
+    font-size: 1rem;
+    font-family: sans-serif;
+}
+.form-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 20px;
+}
+.form{
+    display:flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    
+}
+.field-div{
+    display:flex;
+    flex-direction: column;
+    margin-left:20px;
+    width:22vw;
+    
+    
+}
+.field{
+    width:100%;
+    padding: 10px;
+    height:50px;
+    border: 1px solid blue;
+    outline: none;
+    border-radius: 5px;
+    
+}
+input[name='dateOfJoin']::after{
+    content: 'date of join';
+    font-size: 10px;
+    color:blueviolet;
+}
+input[name='dob']::after{
+    content: 'date of birth';
+    font-size: 10px;
+    color:blueviolet;
+}
+.field:focus{
+    border:1px solid red;
+}
+
+.error-message{
+    color:red;
+}
+.form-buttons-div{
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+    width:100%;
+}
+.form-buttons-div button{
+    width:100px;
+    height:5vh;
+    border-radius: 5px;
+    border:1px solid black;
+    background-color: blanchedalmond;
+
+}
+.form-buttons-div button:hover{
+    background-color: aqua;
+    border:1px solid blue
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+  }
+  
+  .custom-file-upload:hover {
+    background-color: #e0e0e0;
+  }
+  
