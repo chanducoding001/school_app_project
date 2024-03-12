@@ -116,6 +116,21 @@ const ViewEmployeeTable = ({ rows, columns }) => {
     handleOpen('view');
     setRowViewData(modifiedData);
   }
+  const deleteEmployeeById = async (id)=>{
+    try{
+      const response = await fetch(`http://localhost:8000/employees/deleteEmployee/${id}`,{method:'DELETE'});
+      if(!response.ok){
+        console.log('delete unsuccessful');
+        return;
+      }else{
+        const data  = await response.json();
+        console.log('deleted data',data);
+      }
+
+    }catch(err){
+      console.log(err);
+    }
+  }
   const getCellContent = (column, row) => {
     if (column.id === 'profilePicture') {
       return (
@@ -138,7 +153,7 @@ const ViewEmployeeTable = ({ rows, columns }) => {
       <EditIcon/>
     </Button>
     } else if(column.id === 'delete'){
-      return <Button variant="outlined" onClick={() =>{} }>
+      return <Button variant="outlined" onClick={() =>{deleteEmployeeById(row._id)} }>
       <DeleteIcon/>
     </Button>
     }else {
