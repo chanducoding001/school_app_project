@@ -13,6 +13,10 @@ import Authenticate from './protectedRoutes/Authenticate';
 import AddEmployee from './principalPages/AddEmployee';
 import ViewEmployees from './principalPages/ViewEmployees';
 import EditEmployee from './principalPages/EditEmployee';
+import AddStudent from './employeePages/AddStudent';
+import AddParent from './employeePages/AddParent';
+import AttendanceTable from './employeePages/AttendanceTable';
+import Childrens from './parent/Childrens';
 const App = () => {
   // const schoolData = JSON.parse(sessionStorage.getItem('schoolData'));
   // const role = schoolData?.role;
@@ -31,10 +35,14 @@ const App = () => {
         </Route>
         <Route element={<Protected role='2'/>}>
         <Route path='/employee' element={<Employee/>}/>
+        <Route path='/addStudent' element={<AddStudent/>}/>
+        <Route path='/addParent' element={<AddParent/>}/>
+        <Route path='/attendanceTable' element={<AttendanceTable/>}/>
         
         </Route>
         <Route element={<Protected role='3'/>}>
         <Route path='/parent' element={<Parent/>}/>
+        <Route path='/childrenProfile' element={<Childrens/>}/>
         </Route>
       </Route>
       </Route>

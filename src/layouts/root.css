@@ -1,3 +1,44 @@
 /* .active-link{
     background-color: aqua;
 } */
+.sidebar-profile{
+    float: right;
+    display: flex;
+    margin-top: 10px;
+    /* margin-right:10px; */
+}
+.sidebar-profile:hover .sidebar-profile-buttons{
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    margin-top: 82px;
+    margin-right: 50px;
+    padding:10px;
+    width:100px;
+    height:100px;
+    background-color: white;
+    box-shadow: beige;
+    justify-content: space-evenly;
+}
+.profile-buttons{
+    background-color: gray;
+    color: white;
+    height:40px;
+    margin-top: 5px;
+    border-radius: 2px;
+    border: none;
+}
+.profile-buttons:hover{
+    background-color: black;
+    color: white;
+    border:2px solid gray;
+}
+.sidebar-profile img{
+    height:80px;
+    width:80px;
+    border-radius: 50%;
+    
+}
+.sidebar-profile-buttons{
+    display: none;
+}

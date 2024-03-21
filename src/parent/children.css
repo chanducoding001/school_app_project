@@ -1,0 +1,137 @@
+::-webkit-scrollbar{
+    display: none;
+}
+.wrapper {
+    display: flex;
+    border: 2px solid black;
+    margin: 10px;
+    overflow: scroll;
+  }
+  
+  .wrapper-one {
+    flex: 1;
+    padding: 16px;
+  }
+  .wrapper-one span{
+    color:darkblue;
+    font-size:larger;
+    font-weight: bold;
+  }
+  .wrapper-two {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .wrapper img {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+  }
+  
+
+  .hover-card {
+    display: none;
+  }
+  
+  .profile-image:hover + .hover-card,
+  .hover-card:hover {
+    display: block;
+  }
+  
+
+
+
+  @media screen and (max-width: 768px) {
+    .wrapper {
+      flex-direction: column-reverse;
+    }
+  }
+  
+
+
+/* .wrapper{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    border:2px solid palegoldenrod;
+    width: 100%;
+    margin-left:10px;
+    margin-right: 10px;
+}
+
+.wrapper-one p{
+    font-size: 3vh;
+    color: black;
+    font-weight: bold;
+}
+.wrapper-one span{
+    font-size: 3vh;
+    color: darkblue;
+    margin-left: 2px;
+}
+.profileImg{
+    border-radius: 50%;
+    height:150px;
+    width:150px;
+}
+@media screen and (max-width: 768px) {
+    .wrapper{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+  }
+   */
+
+   /* .parent-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border: 2px solid palegoldenrod;
+    width: 100%;
+    margin: 0 10px;
+  }
+  
+  .parent-info {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .parent-info p {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    margin: 5px 0;
+  }
+  
+  .parent-info span {
+    color: darkblue;
+  }
+  
+  .profile-image {
+    margin-top: 20px;
+  }
+  
+  .profile-img {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .parent-wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .parent-info {
+      width: auto;
+      margin-bottom: 20px;
+    }
+  
+    .profile-image {
+      margin-top: 0;
+    }
+  }
+   */

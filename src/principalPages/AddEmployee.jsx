@@ -2,12 +2,14 @@ import React, { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./principal.css";
-import e from "cors";
+import { calculateAge } from "./principalRough";
+import { getToken } from "../layouts/sidebarItems";
 const AddEmployee = () => {
-  const documentsRef = useRef(null);
-  const [document, setDocument] = useState("");
-  const [documentError, setDocumentError] = useState("");
-  const [backEndImg, setBackendImg] = useState("");
+  // const documentsRef = useRef(null);
+  // const [document, setDocument] = useState("");
+  // const [documentError, setDocumentError] = useState("");
+  // const [backEndImg, setBackendImg] = useState("");
+  // const [token,setToken] = useState(sessionStorage.getItem('schoolData'));
   const initialValues = {
     dateOfJoin: "",
     username: "",
@@ -28,6 +30,8 @@ const AddEmployee = () => {
     previousOrganisationName: "",
     profilePicture: "",
     documents: [],
+    role:'',
+    password:''
   };
   const validationSchema = Yup.object({
     dateOfJoin: Yup.date().required("date is required!"),
@@ -78,6 +82,8 @@ const AddEmployee = () => {
     documents: Yup.array()
       .min(1, "one doc is required!")
       .required("documents are required!"),
+      role:Yup.string().required('role is required!'),
+      password:Yup.string().required('password is required!')
   });
   const uploadImage = async (data)=>{
     const formData = new FormData();
@@ -121,6 +127,7 @@ const AddEmployee = () => {
     clone.currentPincode = +clone.currentPincode;
     clone.profilePicture = imgData.data["_id"];
     clone.documents = docData;
+    clone.role = 2;
     console.log("values", clone);
     try {
       const response = await fetch(
@@ -129,13 +136,14 @@ const AddEmployee = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "authorization":`Bearer ${getToken()}`
           },
           body: JSON.stringify(clone),
         }
       );
       if (response.ok) {
         const data = await response.json();
-        setBackendImg(data.data.profilePicture);
+        // setBackendImg(data.data.profilePicture);
         console.log(data);
         resetForm();
       }
@@ -144,44 +152,23 @@ const AddEmployee = () => {
     }
   };
 
-  function calculateAge(birthdate) {
-    // Parse the birthdate string to a Date object
-    var birthDate = new Date(birthdate);
+  
+  // const uploadDocument = async (e) => {
+  //   const formData = new FormData();
+  //   formData.append("file", e.target.files[0]);
+  //   const response = await fetch("http://localhost:8000/files", {
+  //     method: "POST",
+  //     body: formData,
+  //   });
+  //   const data = await response.json();
+  //   console.log("image data", data);
+  // };
 
-    // Get the current date
-    var currentDate = new Date();
-
-    // Calculate the difference in years
-    var age = currentDate.getFullYear() - birthDate.getFullYear();
-
-    // Adjust the age if the birthday hasn't occurred yet this year
-    if (
-      currentDate.getMonth() < birthDate.getMonth() ||
-      (currentDate.getMonth() === birthDate.getMonth() &&
-        currentDate.getDate() < birthDate.getDate())
-    ) {
-      age--;
-    }
-
-    return age;
-  }
-
-  const uploadDocument = async (e) => {
-    const formData = new FormData();
-    formData.append("file", e.target.files[0]);
-    const response = await fetch("http://localhost:8000/files", {
-      method: "POST",
-      body: formData,
-    });
-    const data = await response.json();
-    console.log("image data", data);
-  };
-
-  const handleChange = (e) => {
-    const formData = new FormData();
-    formData.append("file", e.target.files[0]);
-    setDocument(formData);
-  };
+  // const handleChange = (e) => {
+  //   const formData = new FormData();
+  //   formData.append("file", e.target.files[0]);
+  //   setDocument(formData);
+  // };
   return (
     <>
       <div>Add employee</div>
@@ -399,6 +386,33 @@ const AddEmployee = () => {
                   </div>
                 </div>
                 <div className="field-div">
+                  <Field
+                    as="select"
+                    placeholder="Role"
+                    name="role"
+                    className="field"
+                  >
+                    <option defaultValue="select role">
+                      Select role
+                    </option>
+                    <option>Employee</option>
+                  </Field>
+                  <div className="error-message">
+                    <ErrorMessage name="role" />
+                  </div>
+                </div>
+                <div className="field-div">
+                  <Field
+                    type="password"
+                    placeholder="password"
+                    name="password"
+                    className="field"
+                  />
+                  <div className="error-message">
+                    <ErrorMessage name="password" />
+                  </div>
+                </div>
+                <div className="field-div">
                 <label htmlFor="image" className="custom-file-upload">
                     Upload profile picture
                   <input
@@ -437,7 +451,7 @@ const AddEmployee = () => {
                     <ErrorMessage name="documents" />
                   </div>
                 </div>
-
+                
                 {/* form end div */}
               </div>
 

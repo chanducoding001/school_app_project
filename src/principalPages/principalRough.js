@@ -31,3 +31,25 @@ export const columns = [
     {id:'edit',label:"Edit",minWidth: 170},
     {id:'delete',label:"Delete",minWidth: 170},
 ]
+
+export function calculateAge(birthdate) {
+    // Parse the birthdate string to a Date object
+    var birthDate = new Date(birthdate);
+
+    // Get the current date
+    var currentDate = new Date();
+
+    // Calculate the difference in years
+    var age = currentDate.getFullYear() - birthDate.getFullYear();
+
+    // Adjust the age if the birthday hasn't occurred yet this year
+    if (
+      currentDate.getMonth() < birthDate.getMonth() ||
+      (currentDate.getMonth() === birthDate.getMonth() &&
+        currentDate.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+
+    return age;
+  }

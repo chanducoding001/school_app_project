@@ -9,6 +9,9 @@ export const getSessionStorageRole = ()=>{
   const {email,role,username} = decodeToken
   return {email,role,username};
 }
+export const getToken = ()=>{
+  return sessionStorage.getItem('schoolData');
+}
   function getItem(label, key, icon, children) {
     return {
       key,

@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./principal.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { getToken } from "../layouts/sidebarItems";
 
 
 const EditEmployee = () => {
@@ -14,7 +15,13 @@ const EditEmployee = () => {
   useEffect(()=>{
     let isMounted = true;
     async function getParticularEmployee(id){
-        const response = await fetch(`http://localhost:8000/employees/getEmployee/${id}`);
+        const response = await fetch(`http://localhost:8000/employees/getEmployee/${id}`,{
+          method:'GET',
+          headers:{
+              'Content-Type':'application/json',
+              'authorization':`Bearer ${getToken()}`
+          },
+      });
         if(!response.ok){
             return;
         }
@@ -126,12 +133,13 @@ const EditEmployee = () => {
       const response = await fetch(
         `http://localhost:8000/employees/putEmployee/${id}`,
         {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
+          method:'PUT',
+          headers:{
+              'Content-Type':'application/json',
+              'authorization':`Bearer ${getToken()}`
           },
-          body: JSON.stringify(clone),
-        }
+          body:JSON.stringify(clone)
+      }
       );
       if (response.ok) {
         const data = await response.json();
